@@ -1,0 +1,10 @@
+1                       // start the 1st run
+0 1 0		        // at time 0, task 1 starts;
+1 1 1 2 0		// at time 1, task 1 ends, then task 2 starts;
+2 2 2 1 0		// at time 2, task 2 is preempted, then task 1 starts;
+3 1 1 2 3		// at time 3, task 1 ends, then task 2 resumes;
+4 2 1 1 0		// at time 4, task 2 ends, then task 1 starts;
+5 1 1		        // at time 5, task 1 ends;
+6 1			// at time 6, end of the 1st run; preempted 1 time
+2		        // start the 2nd run
+6 0			// at time 6, end of the 2nd schedule; preempted 0 time
