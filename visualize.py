@@ -10,7 +10,11 @@ lines = open(sys.argv[1]).readlines()
 for line in lines:
     line = line.split(' ')
     if len(line) == 1:
-        if run == 10:
+        run = int(line[0])
+        print()
+        print('run {}'.format(run))
+    elif len(line) == 2 and L:
+        if run >= 0:
             L.sort(key=lambda x: (x[1], x[0]))
             print('L:', L)
 
@@ -39,14 +43,11 @@ for line in lines:
                                      ' ' if S[j] == S[j+1] else '|'), end='')
                 print()
 
-        run = int(line[0])
-        print()
-        print('run {}'.format(run))
         L.clear()
         T = [0] * 20
         S = [0] * 30
 
-    elif len(line) % 2 == 1:
+    elif len(line) == 3 or len(line) == 5:
         tm = line[0]
         for i in range(1, len(line), 2):
             a, b = line[i], line[i+1]

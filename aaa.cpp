@@ -79,12 +79,22 @@ bool prior(int i, int j)
 
 bool can_finish(int curtm)
 {
+    // check hyperperiod (LCM)
+    // FOR(i, 1, N + 1)
+    // {
+    //     if (curtm % P[i] != 0)
+    //         return false;
+    // }
+    // return curtm;
+
+    if (curtm == 0)
+        return false;
     FOR(i, 1, N + 1)
     {
-        if (curtm % P[i] != 0)
+        if (F[i] + P[i] != curtm)
             return false;
     }
-    return curtm;
+    return true;
 }
 
 int emulate()
@@ -178,7 +188,10 @@ int emulate()
             schedule.push_back({curtm, opt->id, 1});
         }
     }
-    return curtm;
+    if (ready.empty())
+        return curtm;
+    else
+        return 0;  // fail to schedule
 }
 
 void output_schedule()
@@ -257,8 +270,12 @@ int main()
 
         if (D) {
             int endtm = emulate();
-            output_schedule();
-            output_epilogue(endtm);
+            if (endtm) {
+                output_schedule();
+                output_epilogue(endtm);
+            } else {
+                printf("0 0\n");
+            }
         } else {
             long long endtm = 1;
             int p_count = 0;
